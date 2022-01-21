@@ -16,9 +16,9 @@ const getData= async (req,res)=>{
   const {name, password}= req;
   console.log('No matching documents.');
   const Ref = firebase.firestore().collection('login');
-  const query = await Ref.where('user', '==',name,'password', password).get()
+  const query = await Ref.where('user', '==',name).where('password','==',password).get()
   if (query.empty) {
-    console.log('No matching documents.');
+    console.log(name+" - "+password);
     res(null, {"message": "no exitoso"})
   }else{
     res(null, {"message": "exitoso"})
